@@ -1,0 +1,13 @@
+[
+  {
+    "model": "ietf-interfaces@2018-02-20.yang.txt",
+    "question": "What is the name of the top-level container?",
+    "ground_truth": "interfaces",
+    "responses": {
+      "baseline": "The top-level container is interfaces.",
+      "role": "The top-level container defined in the model is interfaces.",
+      "constrained": "The top-level container is interfaces.",
+      "structured": "The relevant container is 'interfaces'."
+    }
+  }
+]

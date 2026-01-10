@@ -1,0 +1,17 @@
+[
+  {
+    "model": "ietf-interfaces@2018-02-20.yang.txt",
+    "question": "What is the name of the top-level container?",
+    "answer": "interfaces"
+  },
+  {
+    "model": "ietf-interfaces@2018-02-20.yang.txt",
+    "question": "What is the prefix used in this YANG module?",
+    "answer": "if"
+  },
+  {
+    "model": "openconfig-if-ip.yang.txt",
+    "question": "Does the model define IPv4 configuration?",
+    "answer": "Yes"
+  }
+]
