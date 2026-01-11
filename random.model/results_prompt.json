@@ -1,0 +1,72 @@
+[
+  {
+    "prompt": "Create IOS XR telemetry configuration to stream BGP data to 192.0.2.100 port 57500 using grpc no-tls.",
+    "ground_truth": "telemetry model-driven\n sensor-group BGP-STATS\n  sensor-path Cisco-IOS-XR-ipv4-bgp-oper:bgp/instances/instance/instance-active/default-vrf/sessions\n  sensor-path Cisco-IOS-XR-ipv4-bgp-oper:bgp/instances/instance/instance-active/default-vrf/neighbors\n  sensor-path Cisco-IOS-XR-ipv4-bgp-oper:bgp/instances/instance/instance-active/default-vrf/process-info\n !\n subscription SUB-BGP\n  sensor-group-id BGP-STATS sample-interval 30000\n  destination-group DG-BGP\n !\n destination-group DG-BGP\n  address-family ipv4 192.0.2.100 port 57500\n   encoding gpb\n   protocol grpc no-tls\n  !\n !\n!",
+    "responses": {
+      "baseline": "telemetry model-driven\nsensor-group BGP_SENSOR\nsensor-path Cisco-IOS-XR-ipv4-bgp-oper:bgp/instances/instance\n!\nsubscription BGP_SUB\nsensor-group-id BGP_SENSOR sample-interval 30000\ndestination-id BGP_DEST\n!\ndestination-group BGP_DEST\naddress-family ipv4\naddress 192.0.2.100 port 57500\nprotocol grpc no-tls\n!\n!\n!"
+    }
+  },
+  {
+    "prompt": "Can you generate telemetry configuration for cisco ios xr about open shortest path first (OSPF)? Use tcp , the telemetry server address is 192.0.2.30 with port 57000. Choose relevant sensor-paths.",
+    "ground_truth": "telemetry model-driven\n sensor-group OSPF-STATS\n  sensor-path Cisco-IOS-XR-ipv4-ospf-oper:ospf/processes/process/default-vrf/mpls-te\n  sensor-path Cisco-IOS-XR-ipv4-ospf-oper:ospf/processes/process/default-vrf/neighbors\n  sensor-path Cisco-IOS-XR-ipv4-ospf-oper:ospf/processes/process/default-vrf/statistics\n !\n subscription SUB-OSPF\n  sensor-group-id OSPF-STATS sample-interval 30000\n  destination-group DG-OSPF\n !\n destination-group DG-OSPF\n  address-family ipv4 192.0.2.30 port 57000\n   encoding json\n   protocol tcp\n  !\n !\n!",
+    "responses": {
+      "baseline": "telemetry model-driven\n sensor-group OSPF_SENSOR\n  sensor-path Cisco-IOS-XR-ipv4-ospf-oper:ospf/processes/process\n !\n subscription OSPF_SUB\n  sensor-group-id OSPF_SENSOR sample-interval 30000\n  destination-id OSPF_DEST\n !\n destination-group OSPF_DEST\n  address-family ipv4\n   address 192.0.2.30 port 57000\n    encoding gpb-kv\n    protocol tcp\n   !\n  !\n !"
+    }
+  },
+  {
+    "prompt": "Create IOS XR telemetry configuration to stream ISIS data to 192.0.2.100 port 57500 using grpc no-tls.",
+    "ground_truth": "telemetry model-driven\n sensor-group ISIS-STATS\n  sensor-path Cisco-IOS-XR-clns-isis-oper:isis/instances/instance/neighbors\n  sensor-path Cisco-IOS-XR-clns-isis-oper:isis/instances/instance/topologies/topology/ipv4-routes/ipv4-route\n !\n subscription SUB-ISIS\n  sensor-group-id ISIS-STATS sample-interval 120000\n  destination-group DG-ISIS\n !\n destination-group DG-ISIS\n  address-family ipv4 192.0.2.100 port 57500\n   encoding json\n   protocol grpc no-tls\n  !\n !\n!",
+    "responses": {
+      "baseline": "telemetry model-driven\n sensor-group ISIS_SENSOR\n  sensor-path Cisco-IOS-XR-clns-isis-oper:isis/instances/instance\n !\n subscription ISIS_SUB\n  sensor-group-id ISIS_SENSOR sample-interval 30000\n  destination-id ISIS_DEST\n !\n destination-group ISIS_DEST\n  address-family ipv4\n   address 192.0.2.100 port 57500\n    encoding self-describing-gpb\n    protocol grpc no-tls\n   !\n  !\n !"
+    }
+  },
+  {
+    "prompt": "Can you generate telemetry configuration for cisco ios xr about mpls traffic engineering (MPLS-TE)? Use tcp , the telemetry server address is 10.10.10.20 with port 57500. Choose relevant sensor-paths.",
+    "ground_truth": "telemetry model-driven\n sensor-group MPLS_TE-STATS\n  sensor-path Cisco-IOS-XR-mpls-te-oper:mpls-te/tunnels-summary\n  sensor-path Cisco-IOS-XR-mpls-te-oper:mpls-te/topology\n  sensor-path Cisco-IOS-XR-mpls-te-oper:mpls-te/fast-reroute\n !\n subscription SUB-MPLS_TE\n  sensor-group-id MPLS_TE-STATS sample-interval 60000\n  destination-group DG-MPLS_TE\n !\n destination-group DG-MPLS_TE\n  address-family ipv4 10.10.10.20 port 57500\n   encoding gpb\n   protocol tcp\n  !\n !\n!",
+    "responses": {
+      "baseline": "telemetry model-driven\n sensor-group MPLS_TE_SENSOR\n  sensor-path Cisco-IOS-XR-mpls-te-oper:mpls-te/tunnels/tunnel\n !\n subscription MPLS_TE_SUB\n  sensor-group-id MPLS_TE_SENSOR sample-interval 30000\n  destination-id MPLS_TE_DEST\n !\n destination-group MPLS_TE_DEST\n  address-family ipv4\n   address 10.10.10.20 port 57500\n    protocol tcp\n   !\n  !\n !"
+    }
+  },
+  {
+    "prompt": "Configure model-driven telemetry for RSVP on IOS XR with server 192.0.2.100:57600, grpc tls, sample interval 30000ms.",
+    "ground_truth": "telemetry model-driven\n sensor-group RSVP-STATS\n  sensor-path Cisco-IOS-XR-ip-rsvp-oper:rsvp/global-neighbor-briefs\n !\n subscription SUB-RSVP\n  sensor-group-id RSVP-STATS sample-interval 30000\n  destination-group DG-RSVP\n !\n destination-group DG-RSVP\n  address-family ipv4 192.0.2.100 port 57600\n   encoding self-describing-gpb\n   protocol grpc tls\n  !\n !\n!",
+    "responses": {
+      "baseline": "telemetry model-driven\nsensor-group RSVP_SENSOR\nsensor-path Cisco-IOS-XR-ipv4-rsvp-oper:rsvp/instances/instance\n!\nsubscription RSVP_SUB\nsensor-group-id RSVP_SENSOR sample-interval 30000\ndestination-id RSVP_DEST\n!\ndestination-group RSVP_DEST\naddress-family ipv4\naddress 192.0.2.100 port 57600\nencoding self-describing-gpb\nprotocol grpc tls\n!\n!\n!"
+    }
+  },
+  {
+    "prompt": "Create IOS XR telemetry configuration to stream MPLS-LDP data to 192.0.2.100 port 5432 using grpc no-tls.",
+    "ground_truth": "telemetry model-driven\n sensor-group MPLS_LDP-STATS\n  sensor-path Cisco-IOS-XR-mpls-ldp-oper:mpls-ldp/nodes/node/default-vrf/summary\n  sensor-path Cisco-IOS-XR-mpls-ldp-oper:mpls-ldp/global/active/default-vrf/statistics\n  sensor-path Cisco-IOS-XR-mpls-ldp-oper:mpls-ldp/nodes/node/default-vrf/neighbors\n !\n subscription SUB-MPLS_LDP\n  sensor-group-id MPLS_LDP-STATS sample-interval 120000\n  destination-group DG-MPLS_LDP\n !\n destination-group DG-MPLS_LDP\n  address-family ipv4 192.0.2.100 port 5432\n   encoding json\n   protocol grpc no-tls\n  !\n !\n!",
+    "responses": {
+      "baseline": "telemetry model-driven\n sensor-group LDP_SENSOR\n  sensor-path Cisco-IOS-XR-mpls-ldp-oper:mpls-ldp/nodes/node\n !\n subscription LDP_SUB\n  sensor-group-id LDP_SENSOR sample-interval 30000\n  destination-id LDP_DEST\n !\n destination-group LDP_DEST\n  address-family ipv4\n   address 192.0.2.100 port 5432\n    encoding self-describing-gpb\n    protocol grpc no-tls\n   !\n  !\n !"
+    }
+  },
+  {
+    "prompt": "Create IOS XR telemetry configuration to stream Interface data to 192.0.2.10 port 57000 using grpc tls.",
+    "ground_truth": "telemetry model-driven\n sensor-group Interface-STATS\n  sensor-path Cisco-IOS-XR-infra-statsd-oper:infra-statistics/interfaces/interface/data-rate\n  sensor-path Cisco-IOS-XR-pfi-im-cmd-oper:interfaces/interface-xr/interface\n !\n subscription SUB-Interface\n  sensor-group-id Interface-STATS sample-interval 15000\n  destination-group DG-Interface\n !\n destination-group DG-Interface\n  address-family ipv4 192.0.2.10 port 57000\n   encoding json\n   protocol grpc tls\n  !\n !\n!",
+    "responses": {
+      "baseline": "telemetry model-driven\n sensor-group IFACE_SENSOR\n  sensor-path Cisco-IOS-XR-pfi-im-cmd-oper:interfaces/interface\n !\n subscription IFACE_SUB\n  sensor-group-id IFACE_SENSOR sample-interval 30000\n  destination-id IFACE_DEST\n !\n destination-group IFACE_DEST\n  address-family ipv4\n   address 192.0.2.10 port 57000\n    encoding self-describing-gpb\n    protocol grpc tls\n   !\n  !\n !"
+    }
+  },
+  {
+    "prompt": "Generate telemetry model-driven configuration for CPU protocol on IOS XR. Server: 10.10.10.10, port: 57600, protocol: grpc tls, encoding: self-describing-gpb.",
+    "ground_truth": "telemetry model-driven\n sensor-group CPU-STATS\n  sensor-path Cisco-IOS-XR-wdsysmon-fd-oper:system-monitoring/cpu-utilization\n !\n subscription SUB-CPU\n  sensor-group-id CPU-STATS sample-interval 30000\n  destination-group DG-CPU\n !\n destination-group DG-CPU\n  address-family ipv4 10.10.10.10 port 57600\n   encoding self-describing-gpb\n   protocol grpc tls\n  !\n !\n!",
+    "responses": {
+      "baseline": "telemetry model-driven\n sensor-group CPU_SENSOR\n  sensor-path Cisco-IOS-XR-wdsysmon-fd-oper:system-monitoring/cpu-utilization\n !\n subscription CPU_SUB\n  sensor-group-id CPU_SENSOR sample-interval 30000\n  destination-id CPU_DEST\n !\n destination-group CPU_DEST\n  address-family ipv4\n   address 10.10.10.10 port 57600\n    encoding self-describing-gpb\n    protocol grpc tls\n   !\n  !\n !"
+    }
+  },
+  {
+    "prompt": "Create IOS XR telemetry configuration to stream Memory data to 192.0.2.100 port 57400 using grpc tls.",
+    "ground_truth": "telemetry model-driven\n sensor-group Memory-STATS\n  sensor-path Cisco-IOS-XR-nto-misc-oper:memory-summary/nodes/node/summary\n !\n subscription SUB-Memory\n  sensor-group-id Memory-STATS sample-interval 30000\n  destination-group DG-Memory\n !\n destination-group DG-Memory\n  address-family ipv4 192.0.2.100 port 57400\n   encoding gpb\n   protocol grpc tls\n  !\n !\n!",
+    "responses": {
+      "baseline": "telemetry model-driven\n sensor-group MEMORY_SENSOR\n  sensor-path Cisco-IOS-XR-wdsysmon-fd-oper:system-monitoring/memory-utilization\n !\n subscription MEMORY_SUB\n  sensor-group-id MEMORY_SENSOR sample-interval 30000\n  destination-id MEMORY_DEST\n !\n destination-group MEMORY_DEST\n  address-family ipv4\n   address 192.0.2.100 port 57400\n    encoding self-describing-gpb\n    protocol grpc tls\n   !\n  !\n !"
+    }
+  },
+  {
+    "prompt": "Create IOS XR telemetry configuration to stream Optics data to 192.0.2.20 port 57400 using grpc tls.",
+    "ground_truth": "telemetry model-driven\n sensor-group Optics-STATS\n  sensor-path Cisco-IOS-XR-controller-optics-oper:optics-oper/optics-ports/optics-port/optics-info\n !\n subscription SUB-Optics\n  sensor-group-id Optics-STATS sample-interval 120000\n  destination-group DG-Optics\n !\n destination-group DG-Optics\n  address-family ipv4 192.0.2.20 port 57400\n   encoding json\n   protocol grpc tls\n  !\n !\n!",
+    "responses": {
+      "baseline": "telemetry model-driven\n sensor-group OPTICS_SENSOR\n  sensor-path Cisco-IOS-XR-controller-optics-oper:optics-oper/optics-ports/optics-port\n !\n subscription OPTICS_SUB\n  sensor-group-id OPTICS_SENSOR sample-interval 30000\n  destination-id OPTICS_DEST\n !\n destination-group OPTICS_DEST\n  address-family ipv4\n   address 192.0.2.20 port 57400\n    encoding self-describing-gpb\n    protocol grpc tls\n   !\n  !\n !"
+    }
+  }
+]
